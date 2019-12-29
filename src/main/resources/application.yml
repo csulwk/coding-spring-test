@@ -1,0 +1,18 @@
+# 端口信息
+server:
+  port: 9102
+spring:
+  application:
+    name: spring-docker-test
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.99.100:3306/db_test?characterEncoding=utf8
+    username: root
+    password: ENC(pwb04a/MdkhIK3WyYZGDlVBw==)
+# 整合mybatis
+mybatis:
+  # 数据持久化实体类路径
+  type-aliases-package: com.lwk.coding.entity
+  # xml文件路径
+  mapper-locations: classpath:mapper/*.xml
