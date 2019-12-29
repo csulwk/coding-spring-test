@@ -1,6 +1,6 @@
 <configuration>
     <Properties>
-        <Property name="app-name">cookie</Property>
+        <Property name="app-name">coding-spring-test</Property>
         <Property name="log-path">${env:LOG_HOME:-/log/}${hostName}</Property>
     </Properties>
     <Appenders>
