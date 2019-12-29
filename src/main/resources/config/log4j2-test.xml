@@ -1,0 +1,8 @@
+<configuration>
+    <Properties>
+        <Property name="app-name">cookie</Property>
+        <Property name="log-path">${env:LOG_HOME:-/log/}${hostName}</Property>
+    </Properties>
+    <Appenders>
+    </Appenders>
+</configuration>

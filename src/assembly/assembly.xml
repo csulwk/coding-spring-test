@@ -1,0 +1,4 @@
+<assembly>
+    <id>bin</id>
+    <formats>tar.gz</formats>
+</assembly>
