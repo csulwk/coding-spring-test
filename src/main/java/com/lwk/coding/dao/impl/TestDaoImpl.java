@@ -11,7 +11,6 @@ import java.util.List;
  * @author kai
  * @date 2019-12-29 22:10
  */
-@Repository
 public class TestDaoImpl implements ITestDao {
 
     @Override

@@ -9,10 +9,22 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.99.100:3306/db_test?characterEncoding=utf8
     username: root
-    password: ENC(pwb04a/MdkhIK3WyYZGDlVBw==)
+    password: 123456
 # 整合mybatis
 mybatis:
   # 数据持久化实体类路径
   type-aliases-package: com.lwk.coding.entity
   # xml文件路径
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 开启驼峰映射
+    map-underscore-to-camel-case: true
+    # 指定日志打印
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 配置打印sql
+logging:
+  level:
+    com.lwk.coding.dao: trace
+jasypt:
+  encryptor:
+    password: coding

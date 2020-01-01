@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lwk.coding.dao.IUserInfoDao">
+    <!-- resultMap定义SQL查询结果和实体类的映射关系 -->
+    <!-- id:设置resultMap的id -->
+    <!-- type:指定映射的实体类 -->
+    <resultMap id="userInfoMap" type="com.lwk.coding.entity.UserInfo">
+        <!-- 定义主键,非常重要。如果是多个字段,则定义多个id -->
+        <!-- property:主键在实体类中的属性名 -->
+        <!-- column:主键在数据库中的列名 -->
+        <id property="uiId" column="ui_id" />
+        <!-- 定义普通属性 -->
+        <result property="uiName" column="ui_name"/>
+        <result property="uiAge" column="ui_age"/>
+    </resultMap>
+
+    <!-- 定义可重用的SQL代码段,可通过include标签引用 -->
+    <sql id="selectAllUser">
+        SELECT ui_id, ui_name, ui_age
+        FROM user_info
+    </sql>
+
+    <!-- id:当前SQL语句的唯一标识,对应dao里面的方法 -->
+    <!-- parameterType:表示当前SQL接受的参数类型 -->
+    <!-- resultType:表示前SQL返回的结果类型 -->
+    <!-- resultMap：自定义映射返回结果,resultType与resultMap二选一配置 -->
+    <select id="getObjByName" parameterType="java.lang.String" resultType="com.lwk.coding.entity.UserInfo">
+        <include refid="selectAllUser"/>
+        WHERE ui_name = #{uiName}
+    </select>
+    <!--
+        <select id="getAllObj" resultMap="userResultMap">
+            <include refid="selectAllUser"/>
+        </select> -->
+
+        <insert id="saveObj" parameterType="com.lwk.coding.entity.UserInfo">
+            INSERT INTO user_info(ui_id, ui_name, ui_age)
+            VALUES (#{uiId}, #{uiName}, #{uiAge})
+        </insert>
+
+        <delete id="deleteObjById" parameterType="java.lang.Integer">
+            DELETE FROM user_info
+            WHERE ui_id = #{uiId}
+        </delete>
+
+        <!-- prefix:指定sql语句拼接的前缀 -->
+    <!-- suffix:指定sql语句拼接的后缀 -->
+    <!-- prefixOverrides:去除sql语句前面的关键字或者字符 -->
+    <!-- suffixOverrides:去除sql语句后面的关键字或者字符 -->
+    <update id="updateObj" parameterType="com.lwk.coding.entity.UserInfo">
+        UPDATE user_info
+        <trim prefix="SET" suffix="WHERE ui_id = #{uiId}" suffixOverrides=",">
+            <if test="uiName != null">ui_name = #{uiName},</if>
+            <if test="uiAge != null">ui_age = #{uiAge},</if>
+        </trim>
+    </update>
+
+</mapper>

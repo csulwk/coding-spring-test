@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * @author kai
  * @date 2019-12-29 22:13
  */
-@Service
+@Service("testService")
 public class TestServiceImpl implements ITestService {
     private static final Logger LOG = LoggerFactory.getLogger(TestServiceImpl.class);
 

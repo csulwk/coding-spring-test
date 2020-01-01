@@ -14,6 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UserInfo {
-    private Integer uiId;
+    private String uiId;
     private String uiName;
+    private Integer uiAge;
 }
