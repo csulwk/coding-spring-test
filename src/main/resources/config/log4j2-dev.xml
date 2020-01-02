@@ -15,7 +15,7 @@
     <!-- 指定项目名称 -->
     <property name="APP_NAME" value="coding-spring-test" />
     <!-- 指定日志存储的路径 -->
-    <property name="LOG_PATH" value="${LOG_HOME}" />
+    <property name="LOG_PATH" value="${LOG_PATH:-./tmp/logs/}" />
 </Properties>
 
 <appenders>

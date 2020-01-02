@@ -1,6 +1,6 @@
 package com.lwk.coding.service.impl;
 
-import com.lwk.coding.dao.IUserInfoDao;
+import com.lwk.coding.mapper.IUserInfoMapper;
 import com.lwk.coding.entity.UserInfo;
 import com.lwk.coding.service.IUserInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,17 +18,17 @@ import java.util.List;
 public class UserInfoService extends BaseServiceImpl<UserInfo> implements IUserInfoService {
 
     @Autowired
-    private IUserInfoDao userInfoDao;
+    private IUserInfoMapper userInfoMapper;
 
     @Override
     public List<UserInfo> getAllObj() {
-        return userInfoDao.getAllObj();
+        return userInfoMapper.getAllObj();
     }
 
     @Override
     public boolean saveObj(UserInfo o) {
         try {
-            userInfoDao.saveObj(o);
+            userInfoMapper.saveObj(o);
             return true;
         } catch (Exception e) {
             log.error("UserInfoService.saveObj调用报错!", e);
@@ -39,7 +39,7 @@ public class UserInfoService extends BaseServiceImpl<UserInfo> implements IUserI
     @Override
     public boolean deleteObjById(Integer id) {
         try {
-            userInfoDao.deleteObjById(id);
+            userInfoMapper.deleteObjById(id);
             return true;
         } catch (Exception e) {
             log.error("UserInfoService.deleteObjById调用报错!", e);
@@ -50,7 +50,7 @@ public class UserInfoService extends BaseServiceImpl<UserInfo> implements IUserI
     @Override
     public boolean updateObj(UserInfo o) {
         try {
-            userInfoDao.updateObj(o);
+            userInfoMapper.updateObj(o);
             return true;
         } catch (Exception e) {
             log.error("UserInfoService.updateObj调用报错!", e);
@@ -60,6 +60,6 @@ public class UserInfoService extends BaseServiceImpl<UserInfo> implements IUserI
 
     @Override
     public UserInfo getObjByName(String name) {
-        return userInfoDao.getObjByName(name);
+        return userInfoMapper.getObjByName(name);
     }
 }

@@ -27,7 +27,6 @@ public class UserInfoServiceTest {
 
     @Test
     public void testGetByName() {
-        System.setProperty ("LOG_HOME", "D:\\Workspace\\logs\\");
         String userName = "Miya";
         UserInfo userInfo = userInfoService.getObjByName(userName);
         System.out.println("====UserInfo====");

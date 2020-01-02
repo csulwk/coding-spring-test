@@ -10,7 +10,7 @@ import java.util.List;
  * @author kai
  * @date 2019-12-29 22:10
  */
-@Repository("testDao")
+
 public interface ITestDao {
     /**
      * 分页查询
