@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableDiscoveryClient
 @SpringBootApplication
 @ServletComponentScan
+@ComponentScan("com.lwk")
 @MapperScan("com.lwk.coding.mapper")
 @EnableAsync
 @Slf4j

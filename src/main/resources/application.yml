@@ -20,11 +20,7 @@ mybatis:
     # 开启驼峰映射
     map-underscore-to-camel-case: true
     # 指定日志打印
-    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-# 配置打印sql
-logging:
-  level:
-    com.lwk.coding.dao: trace
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 # 生产环境中，切记不要直接进行设置，可通过环境变量、命令行等形式进行设置
 # java -jar xxx.jar --jasypt.encryptor.password=xxx &
 jasypt:
