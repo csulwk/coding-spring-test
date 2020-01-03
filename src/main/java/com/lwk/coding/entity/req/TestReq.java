@@ -5,6 +5,8 @@ import com.lwk.coding.annotation.Numeric;
 import com.lwk.coding.annotation.SpecificValue;
 import com.lwk.coding.constant.CodeSet;
 import com.lwk.coding.constant.Constants;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -14,11 +16,13 @@ import java.io.Serializable;
  * @author kai
  * @date 2019-12-02 0:56
  */
+@ApiModel
 public class TestReq implements Serializable {
 
     /**
      * 查询类型
      */
+    @ApiModelProperty("查询类型")
     @SpecificValue(value = {Constants.OPER_TYPE_OP001,Constants.OPER_TYPE_OP002}, message = CodeSet.CODE_E101)
     @NotBlank(message = CodeSet.CODE_E101)
     private String operType;
@@ -26,6 +30,7 @@ public class TestReq implements Serializable {
     /**
      * 卡号
      */
+    @ApiModelProperty("卡号")
     @Numeric(message = CodeSet.CODE_E102)
     @NotBlank(message = CodeSet.CODE_E102)
     private String cardNumber;

@@ -34,7 +34,7 @@
     <Loggers>
         <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
         <!--additivity设为false，则子Logger只会在自己的appender里输出，而不会在父Logger的appender里输出-->
-        <Logger name="org.mybatis" level="debug" additivity="false">
+        <Logger name="org.mybatis" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
 
@@ -44,10 +44,10 @@
 
         <!--日志级别优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
         <!--AsyncLogger 异步记录日志 -->
-        <AsyncRoot level="INFO" includeLocation="true">
-            <appender-ref ref="Console"/>
-            <appender-ref ref="LoggingFile"/>
-        </AsyncRoot>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LoggingFile"/>
+        </Root>
     </Loggers>
 
 </Configuration>
