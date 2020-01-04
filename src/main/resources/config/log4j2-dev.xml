@@ -3,24 +3,22 @@
     <!--变量配置-->
     <Properties>
         <!-- 指定项目名称 -->
-        <property name="app_name" value="coding-spring-test" />
+        <property name="appName" value="coding-spring-test" />
         <!-- 指定日志存储的路径 -->
-        <property name="log_path" value="${log_path:-./tmp/logs/}" />
-        <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
-        <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
-        <!-- %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n -->
-        <property name="log_reg" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${hostName}] [${app_name}] [%-5level] [%t] %c{1} - %msg%n" />
+        <property name="loggingPath" value="${env:LOG_HOME:-/tmp/logs/}" />
+        <!-- 格式化输出：%d表示日期，%t表示线程名，%-5level表示级别从左显示5个字符宽度 %m是日志消息，%n是换行符-->
+        <property name="loggingPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${hostName}] [${appName}] [%-5level] [%t] [%c{1.}] :) %m%n" />
     </Properties>
 
     <Appenders>
         <!-- 打印到控制台以便调试 -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${log_reg}"/>
+            <PatternLayout pattern="${loggingPattern}"/>
         </Console>
 
         <!-- 打印到文档中以便存档 -->
-        <RollingFile name="LoggingFile" fileName="${log_path}/coding.log" filePattern="${log_path}/coding_%d{yyyy-MM-dd}_%i.log" bufferSize="4194304">
-            <PatternLayout pattern="${log_reg}"/>
+        <RollingFile name="LoggingFile" fileName="${loggingPath}/${appName}.log" filePattern="${loggingPath}/${appName}_%d{yyyy-MM-dd}_%i.log" bufferSize="4194304">
+            <PatternLayout pattern="${loggingPattern}"/>
             <Policies>
                 <!--指定当文件体积大于size指定的值时，触发Rolling-->
                 <SizeBasedTriggeringPolicy size="20MB" />
@@ -30,24 +28,13 @@
         </RollingFile>
     </Appenders>
 
-    <!-- 只有定义了logger并关联对应的appender才会生效-->
     <Loggers>
-        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
-        <!--additivity设为false，则子Logger只会在自己的appender里输出，而不会在父Logger的appender里输出-->
-        <Logger name="org.mybatis" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
-
-        <Logger name="org.springframework" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
-
         <!--日志级别优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
-        <!--AsyncLogger 异步记录日志 -->
-        <Root level="info">
+        <!--AsyncRoot 异步记录日志 -->
+        <AsyncRoot level="info">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="LoggingFile"/>
-        </Root>
+        </AsyncRoot>
     </Loggers>
 
 </Configuration>

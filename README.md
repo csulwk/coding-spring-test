@@ -12,13 +12,13 @@ https://github.com/csulwk/coding-spring-test.git
  7. 对接注册中心  
  8. 对接调用链和性能监控zipkin  
  9. 对接metrics和jvm监控，prometheus，grafana  
-10. 使用Jasypt增强安全性  
+10. 使用jasypt增强安全性  
+11. jenkins持续化集成
 
 
 ## 开发环境
 JDK 1.8  
-SpringBoot 2.1.1  
-Maven  
+SpringBoot 2.2.1  
 
 ## 工程结构
 TBD   
