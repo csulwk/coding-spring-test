@@ -1,31 +1,4 @@
-# 端口信息
-server:
-  port: 9102
+# 多环境配置, 默认使用本地离线环境
 spring:
-  application:
-    name: coding-spring-test
-  # 数据源配置
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.99.100:3306/db_test?characterEncoding=utf8
-    username: root
-    password: ENC(hXC2GiUpg2X71fn5XrfV8g==)
-# 整合mybatis
-mybatis:
-  # 数据持久化实体类路径
-  type-aliases-package: com.lwk.coding.entity
-  # xml文件路径
-  mapper-locations: classpath:mapper/*.xml
-  configuration:
-    # 开启驼峰映射
-    map-underscore-to-camel-case: true
-# 生产环境中，切记不要直接进行设置，可通过环境变量、命令行等形式进行设置
-# java -jar xxx.jar --jasypt.encryptor.password=xxx &
-jasypt:
-  encryptor:
-    password: lwk
-logging:
-  config: classpath:config/log4j2-dev.xml
-  level:
-    # 打印SQL语句的日志级别是DEBUG，而打印SQL执行结果集的日志级别是TRACE
-    com.lwk.coding.mapper: trace
+  profiles:
+    active: baiduyun
