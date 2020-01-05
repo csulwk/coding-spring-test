@@ -64,8 +64,10 @@ start_app(){
             rm -f ${app_name}.pid
             nohup java -jar -server -Xms512m -Xmx512m -Xmn256m -Xss2m         \
                 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${dump_path} \
-                -spring.profiles.active=${RUN_ENV}                            \
+                --spring.profiles.active=${RUN_ENV}                           \
+                --jasypt.encryptor.password=${ENC_KEY}                        \
                 ${app_jar} >/dev/null 2>&1 &
+
             echo $! > ${app_name}.pid
             
             # 打印运行状态

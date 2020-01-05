@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://106.12.159.160:3306/db_test?characterEncoding=utf8&useSSL=false
     username: coding
-    password: coding@2020
+    password: ENC(ABCDEF)
 # 整合mybatis
 mybatis:
   # 数据持久化实体类路径
@@ -23,7 +23,7 @@ mybatis:
 # java -jar xxx.jar --jasypt.encryptor.password=xxx &
 jasypt:
   encryptor:
-    password: baiduyun
+    password: NONE
 logging:
   config: classpath:config/log4j2-baiduyun.xml
   level:
