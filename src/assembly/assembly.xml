@@ -1,4 +1,53 @@
-<assembly>
-    <id>bin</id>
-    <formats>tar.gz</formats>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+
+    <!-- 标识符，添加到生成文件名称的后缀符 -->
+    <id>assembly</id>
+
+    <!-- 可指定多种打包格式 -->
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+        <fileSet>
+            <directory>.</directory>
+
+            <outputDirectory>.</outputDirectory>
+
+            <includes>
+                <include>bin/*</include>
+                <include>README.md</include>
+            </includes>
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>target</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>target/classes</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>config/*</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <!-- 可以控制依赖包是否在打包进来时是否解开 -->
+            <unpack>false</unpack>
+            <scope>runtime</scope>
+            <!-- 指定包依赖目录，该目录是相对于根目录 -->
+            <outputDirectory>lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
 </assembly>

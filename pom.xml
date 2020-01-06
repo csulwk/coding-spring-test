@@ -33,6 +33,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <swagger.version>2.9.2</swagger.version>
         <junit.version>4.12</junit.version>
+        <build.number>b1</build.number>
     </properties>
 
     <dependencies>
@@ -147,11 +148,75 @@
 
     <build>
         <plugins>
-            <!-- maven-compiler-plugin -->
-            <!-- maven-surefire-plugin -->
+            <!-- 指定maven编译的jdk版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <!-- 指定源代码使用的jdk版本 -->
+                    <source>${java.version}</source>
+                    <!-- 指定生成目标class文件的编译版本 -->
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.2.0</version>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- 绑定到package生命周期 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 只运行一次 -->
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 打包文件命名规范：项目名-版本号- -->
+                    <finalName>${project.artifactId}-${project.version}-${build.number}</finalName>
+                    <!-- 自定义配置描述符文件-->
+                    <descriptors>
+                        <descriptor>src/assembly/assembly.xml</descriptor>
+                    </descriptors>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.22.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!-- 跳过测试用例: -DskipTests=true-->
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- maven-jar-plugin -->
-            <!-- maven-shade-plugin -->
-            <!-- maven-assembly-plugin -->
         </plugins>
     </build>
 
