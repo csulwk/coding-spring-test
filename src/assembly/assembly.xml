@@ -40,14 +40,14 @@
             </includes>
         </fileSet>
     </fileSets>
-
+    <!--unpack: 可以控制依赖包是否在打包进来时是否解开 -->
+    <!-- outputDirectory: 指定包依赖目录，该目录是相对于根目录 -->
+    <!--
     <dependencySets>
         <dependencySet>
-            <!-- 可以控制依赖包是否在打包进来时是否解开 -->
             <unpack>false</unpack>
             <scope>runtime</scope>
-            <!-- 指定包依赖目录，该目录是相对于根目录 -->
             <outputDirectory>lib</outputDirectory>
         </dependencySet>
-    </dependencySets>
+    </dependencySets> -->
 </assembly>

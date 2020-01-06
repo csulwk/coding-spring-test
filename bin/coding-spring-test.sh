@@ -30,7 +30,8 @@ echo "项目目录: "${HOME_PATH}
 
 # 项目名称
 app_name=coding-spring-test
-app_jar=${app_name}".jar"
+app_version=v1.1.0
+app_jar=${app_name}-${app_version}".jar"
 echo "项目名称: "${app_jar}
 
 # DUMP快照
@@ -66,7 +67,7 @@ start_app(){
                 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${dump_path} \
                 --spring.profiles.active=${RUN_ENV}                           \
                 --jasypt.encryptor.password=${ENC_KEY}                        \
-                ${app_jar} >/dev/null 2>&1 &
+                ${HOME_PATH}/${app_jar} >/dev/null 2>&1 &
 
             echo $! > ${app_name}.pid
             
