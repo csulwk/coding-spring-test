@@ -1,4 +1,5 @@
 # 多环境配置, 默认使用本地离线环境
+# 本地：docker | 远程：baiduyun
 spring:
   profiles:
-    active: baiduyun
+    active: docker

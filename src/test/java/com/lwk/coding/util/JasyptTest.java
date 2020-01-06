@@ -24,11 +24,11 @@ public class JasyptTest {
 
     @Test
     public void encrypt() {
-        System.out.println("encrypt: " + encryptor.encrypt("123456"));
+        log.info("encrypt: {}", encryptor.encrypt("pw"));
     }
 
     @Test
     public void decrypt() {
-        System.out.println("decrypt: " + encryptor.decrypt("hXC2GiUpg2X71fn5XrfV8g=="));
+        log.info("decrypt: {}" ,encryptor.decrypt("pw"));
     }
 }
