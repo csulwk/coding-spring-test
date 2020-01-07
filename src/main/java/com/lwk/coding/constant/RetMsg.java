@@ -6,7 +6,7 @@ package com.lwk.coding.constant;
  */
 public enum RetMsg {
     SUCCESS(CodeSet.CODE_S000, "返回成功"),
-    RET_E101(CodeSet.CODE_E101, "响应错误1"),
+    RET_E101(CodeSet.CODE_E101, "输入参数为空"),
     RET_E102(CodeSet.CODE_E102, "响应错误2"),
     RET_E103(CodeSet.CODE_E103, "响应错误3"),
     RET_E104(CodeSet.CODE_E104, "响应错误4"),

@@ -16,13 +16,16 @@ echo "------------------------------------------"
 sys_date=`date +"%Y%m%d"`
 echo "系统日期: "${sys_date}
 
-# 运行环境
+# 获取运行环境
+if [ -z ${ENV_LABEL} ]; then
+  echo "ENV_LABEL is not set up..."
+  exit 1
+fi
 RUN_ENV=${ENV_LABEL}
 echo "运行环境: "${RUN_ENV}
 
 command=$1
 echo "执行命令: "${command}
-
 
 # 项目目录
 HOME_PATH=$(cd `dirname $0`;cd ../; pwd);
@@ -30,13 +33,12 @@ echo "项目目录: "${HOME_PATH}
 
 # 项目名称
 app_name=coding-spring-test
-app_version=v1.1.0
-app_jar=${app_name}-${app_version}".jar"
-echo "项目名称: "${app_jar}
-
-# DUMP快照
-dump_path=/appdata/logs/oom/
-echo "DUMP快照: "${dump_path}
+# 获取jar文件
+for jar in "${HOME_PATH}"/*.jar
+do
+  app_jar=${jar}
+done
+echo "JAR 文件: "${app_jar}
 echo "------------------------------------------"
 
 #---------------------------------------------------------------------#
@@ -54,61 +56,66 @@ echo "------------------------------------------"
 start_app(){
     app_pid=`ps -ef|grep $app_jar|grep -v grep|grep -v kill|awk '{print $2}'`
     if [ ${app_pid} ]; then
-        echo ${app_jar}" is running, pid = "${app_pid}
+        echo "${app_jar} is running, pid = ${app_pid}"
     else
         if [ -e ${app_jar} ]; then
+            # DUMP快照
+            dump_path=${HOME_PATH}/dump/
+            echo "DUMP快照: "${dump_path}
             # 日志文件夹不存在，则创建
             if [ ! -d ${dump_path} ]; then
                 mkdir -p ${dump_path}
             fi
-            
-            rm -f ${app_name}.pid
-            nohup java -jar -server -Xms512m -Xmx512m -Xmn256m -Xss2m         \
-                -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${dump_path} \
-                --spring.profiles.active=${RUN_ENV}                           \
-                --jasypt.encryptor.password=${ENC_KEY}                        \
-                ${HOME_PATH}/${app_jar} >/dev/null 2>&1 &
 
-            echo $! > ${app_name}.pid
+            nohup java -jar ${app_jar} -server -Xms512m -Xmx512m -Xmn256m -Xss2m \
+                -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${dump_path}    \
+                --spring.profiles.active=${RUN_ENV}                              \
+                --jasypt.encryptor.password=${ENC_KEY}                           \
+                >/dev/null 2>&1 &
+
+            if [ $? -eq 0 ]; then
+              echo "${app_jar} start sucess~"
+            else
+              echo "${app_jar} start failed..."
+              exit 1
+            fi
             
             # 打印运行状态
             status_app
         else
-            echo ${app_jar}" is not exist..."
+            echo "${app_jar} is not exist..."
         fi
     fi
 }
 
 # 停止服务
 stop_app(){
-    # app_pid=$(cat ${app_name}.pid)
     app_pid=`ps -ef|grep $app_jar|grep -v grep|grep -v kill|awk '{print $2}'`
     if [ ${app_pid} ]; then
-        echo ${app_jar}" is beginning to be killed normally, pid = "${app_pid}
+        echo "${app_jar} is beginning to be killed normally, pid = ${app_pid}"
         kill -15 ${app_pid}
     fi
     sleep 3
 
     app_pid=`ps -ef|grep $app_jar|grep -v grep|grep -v kill|awk '{print $2}'`
     if [ ${app_pid} ]; then
-        echo ${app_jar}" is beginning to be killed forcibly, pid = "${app_pid}
+        echo "${app_jar} is beginning to be killed forcibly, pid = ${app_pid}"
         kill -9 ${app_pid}
         
         sleep 3
-        echo ${app_jar}" has been killed..."
+        echo "${app_jar} has been killed~"
     else
-        echo ${app_jar}" is not running..."
+        echo "${app_jar} is not running~"
     fi
-    rm -f ${app_name}.pid
 }
 
 # 查看服务状态
 status_app(){
     app_pid=`ps -ef|grep $app_jar|grep -v grep|grep -v kill|awk '{print $2}'`
     if [ ${app_pid} ]; then
-        echo ${app_jar}" is running, pid = "${app_pid}
+        echo "${app_jar} is running, pid = ${app_pid}"
     else
-        echo ${app_jar}" is not running..."
+        echo "${app_jar} is not running~"
     fi
 }
 

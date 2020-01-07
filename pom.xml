@@ -148,7 +148,6 @@
 
     <build>
         <plugins>
-            <!-- 指定maven编译的jdk版本 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -161,6 +160,24 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.22.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!-- 跳过测试用例: -DskipTests=true-->
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -179,44 +196,40 @@
                 </executions>
                 <configuration>
                     <!-- 打包文件命名规范：项目名-版本号- -->
-                    <finalName>${project.artifactId}-${project.version}-${build.number}</finalName>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <!-- 打包文件的存放路径 -->
+                    <outputDirectory>dist</outputDirectory>
                     <!-- 自定义配置描述符文件-->
                     <descriptors>
                         <descriptor>src/assembly/assembly.xml</descriptor>
                     </descriptors>
-                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>2.22.0</version>
-                    </dependency>
-                </dependencies>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
-                    <!-- 跳过测试用例: -DskipTests=true-->
-                    <skipTests>true</skipTests>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifest>
+                            <!-- 指定运行时的主程序类全名 -->
+                            <mainClass>com.lwk.coding.Application</mainClass>
+                            <!-- 是否添加依赖的jar路径配置 -->
+                            <addClasspath>true</addClasspath>
+                            <!-- 指定依赖的时候声明前缀 -->
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <!--依赖是否使用带有时间戳的唯一版本号-->
+                            <useUniqueVersions>false</useUniqueVersions>
+                            <addDefaultImplementationEntries>true/</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>false/</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                            <goal>build-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- maven-jar-plugin -->
+
         </plugins>
     </build>
 

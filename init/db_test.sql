@@ -9,10 +9,10 @@ CREATE TABLE `user_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-INSERT INTO `user_info` VALUES (201912290001, 'Tom', '10');
-INSERT INTO `user_info` VALUES (201912290002, 'Ley', '20');
-INSERT INTO `user_info` VALUES (201912290003, 'Kong', '30');
-INSERT INTO `user_info` VALUES (201912290004, 'Miya', '40');
+INSERT INTO `user_info` VALUES (201912290001, 'tom', '10');
+INSERT INTO `user_info` VALUES (201912290002, 'ley', '20');
+INSERT INTO `user_info` VALUES (201912290003, 'kong', '30');
+INSERT INTO `user_info` VALUES (201912290004, 'lily', '40');
 INSERT INTO `user_info` VALUES (201912290005, '测试用户', '50');
 
 DROP TABLE IF EXISTS good_info;
@@ -37,6 +37,6 @@ CREATE TABLE `order_info` (
   PRIMARY KEY (`oi_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-INSERT INTO `order_info` VALUES (1, 201912290001, 1001, 'Tom喜欢电影');
-INSERT INTO `order_info` VALUES (2, 201912290001, 1002, 'Tom喜欢音乐');
-INSERT INTO `order_info` VALUES (3, 201912290004, 1003, 'Miya喜欢食物');
+INSERT INTO `order_info` VALUES (1, 201912290001, 1001, 'tom喜欢电影');
+INSERT INTO `order_info` VALUES (2, 201912290001, 1002, 'tom喜欢音乐');
+INSERT INTO `order_info` VALUES (3, 201912290004, 1003, 'lily喜欢食物');
