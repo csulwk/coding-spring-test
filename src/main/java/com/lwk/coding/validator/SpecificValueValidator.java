@@ -1,5 +1,6 @@
 package com.lwk.coding.validator;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lwk.coding.annotation.SpecificValue;
 
 import javax.validation.ConstraintValidator;
@@ -26,7 +27,7 @@ public class SpecificValueValidator implements ConstraintValidator<SpecificValue
         }
 
         for (String val : values) {
-            if (val.equals(values)) {
+            if (val.equals(value)) {
                 return true;
             }
         }

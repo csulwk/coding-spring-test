@@ -1,6 +1,7 @@
 package com.lwk.coding.constant;
 
 /**
+ * 固定参数常量类
  * @author kai
  * @date 2019-12-29 22:13
  */

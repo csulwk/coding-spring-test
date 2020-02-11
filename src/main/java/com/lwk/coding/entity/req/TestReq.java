@@ -7,6 +7,7 @@ import com.lwk.coding.constant.CodeSet;
 import com.lwk.coding.constant.Constants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -33,6 +34,7 @@ public class TestReq implements Serializable {
     @ApiModelProperty("卡号")
     @Numeric(message = CodeSet.CODE_E102)
     @NotBlank(message = CodeSet.CODE_E102)
+    @Length(message = CodeSet.CODE_E102, min = 6)
     private String cardNumber;
 
     public String getOperType() {

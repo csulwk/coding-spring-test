@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class OrderInfo {
-    private Integer oi_id;
+    private Integer oiId;
     private String oiUserId;
     private String oiGoodId;
     private String oiDesc;

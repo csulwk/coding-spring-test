@@ -1,6 +1,7 @@
 package com.lwk.coding.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lwk.coding.annotation.RequestLog;
 import com.lwk.coding.constant.RetMsg;
 import com.lwk.coding.entity.UserInfo;
 import com.lwk.coding.service.impl.UserInfoService;
@@ -12,10 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author kai
@@ -32,10 +30,11 @@ public class UserInfoController {
 
     @ApiOperation("根据姓名查询用户信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "用户姓名", required = false)
+            @ApiImplicitParam(name = "name", value = "用户姓名", required = true)
     })
-    @RequestMapping(value = {"/{name}", "/"}, method = RequestMethod.GET)
-    public JSONObject queryUserInfoByName(@PathVariable(value = "name", required = false) String name) {
+    @RequestLog(description = "请求查询用户信息")
+    @GetMapping("/{name}")
+    public JSONObject queryUserInfoByName(@PathVariable(value = "name", required = true) String name) {
         log.info("根据姓名查询用户信息 -> " , JSONObject.toJSONString(name));
 
         if (StringUtils.isEmpty(name)) {

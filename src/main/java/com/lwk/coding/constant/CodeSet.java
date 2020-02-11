@@ -1,6 +1,7 @@
 package com.lwk.coding.constant;
 
 /**
+ * 响应码常量类
  * @author kai
  * @date 2019-12-29 22:13
  */

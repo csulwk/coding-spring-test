@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
 
     @ApiOperation("测试接口")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @GetMapping("/index")
     public JSONObject index() {
         log.info("IndexController -> {}", "测试接口");
         return ResultUtil.retSuccess();

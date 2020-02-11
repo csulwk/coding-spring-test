@@ -10,6 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 数字校验自定义注解
  * @author kai
  * @date 2019-12-29 22:13
  */

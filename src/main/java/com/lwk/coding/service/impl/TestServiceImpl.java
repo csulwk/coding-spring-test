@@ -30,7 +30,7 @@ public class TestServiceImpl implements ITestService {
     @Override
     public JSONObject queryCardInfo(TestReq req) {
         List<CardInfoEntity> list = testDao.queryCardInfo(req);
-        if (list.isEmpty()) {
+         if (list.isEmpty()) {
             LOG.info("queryCardInfo is empty");
             return ResultUtil.resp(RetMsg.RET_E103);
         }

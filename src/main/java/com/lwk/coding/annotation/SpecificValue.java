@@ -1,6 +1,7 @@
 package com.lwk.coding.annotation;
 
 /**
+ * 特定值校验自定义注解
  * @author kai
  * @date 2019-12-29 22:13
  */
