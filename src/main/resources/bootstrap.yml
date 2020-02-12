@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: coding-spring-test
+  cloud:
+    config:
+      uri: http://106.12.159.160:9188/
+      label: master
+      profile: ${spring.profiles.active}
+      fail-fast: true

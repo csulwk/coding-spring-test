@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #----------------------------------#
-# 功能说明: jenkins发布执行脚本, sh coding-spring-test.sh 版本号
+# 功能说明: jenkins发布执行脚本, sh app_name.sh build_num app_name
 #          执行脚本钱需要在jenkins中执行[source /etc/profile]加载环境变量
 # 作者    : lwk
 # 日期    : 2020-1-10 22:01:05
@@ -19,9 +19,14 @@ echo "系统日期: ${sys_date}"
 
 # 构建版本号
 build_num=$1
-echo "当前版本: ${build_num}"
+echo "构建版本号: ${build_num}"
 
-app_tar="/home/coding/app/coding-spring-test-1.0.0.tar.gz"
+# 应用名
+app_name=$2
+app_version=1.0.0
+echo "应用版本名: ${app_name}-${app_version}"
+
+app_tar="/home/coding/app/${app_name}-${app_version}.tar.gz"
 if [ ! -e ${app_tar} ]; then
   echo "${app_tar##*/} is not exist..."
   exit 1
@@ -38,14 +43,14 @@ fi
 echo "运行环境: "${env_label}
 
 # 先关闭运行中的服务再发布新的版本程序
-app_dir=/home/coding/app/coding-spring-test
-sh ${app_dir}/bin/coding-spring-test.sh stop
+app_dir=/home/coding/app/${app_name}
+sh ${app_dir}/bin/${app_name}.sh stop
 rm -rf ${app_dir}
 mkdir -p ${app_dir}
-tar -zxvf /home/coding/app/coding-spring-test-1.0.0.tar.gz -C ${app_dir}
+tar -zxvf /home/coding/app/${app_name}-${app_version}.tar.gz -C ${app_dir}
 echo "${app_tar} decompression completed~"
 
-sh ${app_dir}/bin/coding-spring-test.sh start
+sh ${app_dir}/bin/${app_name}.sh start
 
 echo "------------------------------------------"
 echo "jenkins远程执行结束..."
