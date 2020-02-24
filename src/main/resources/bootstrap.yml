@@ -1,9 +1,22 @@
+# 应用配置项
 spring:
   application:
+    # 应用名称
     name: coding-spring-test
   cloud:
+    # 配置中心
     config:
-      uri: http://106.12.159.160:9188/
-      label: master
-      profile: ${spring.profiles.active}
-      fail-fast: true
+      # 远程服务地址
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://106.12.159.160:9188/}
+      # 仓库分支
+      label: ${SPRING_CLOUD_CONFIG_LABEL:master}
+      # 当前环境
+      profile: ${spring.profiles.active:docker}
+
+# 客户端本地文件配置项
+coding:
+  config:
+    client:
+      enabled: true
+      cover: true
+      apply: true

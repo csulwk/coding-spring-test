@@ -1,6 +1,9 @@
 # Java Class
 *.class
 
+# Local File
+client-config*.properties
+
 # Package Files
 *.jar
 *.war
