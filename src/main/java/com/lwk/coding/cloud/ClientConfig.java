@@ -1,9 +1,8 @@
-package com.lwk.coding.client;
+package com.lwk.coding.cloud;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.system.ApplicationHome;
 import org.springframework.cloud.config.client.ConfigServicePropertySourceLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
  * @author kai
  * @date 2020-02-20 21:01
  */
-//@Configuration
 @Slf4j
 public class ClientConfig {
 

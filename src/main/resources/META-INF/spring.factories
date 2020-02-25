@@ -1,2 +1,2 @@
 org.springframework.cloud.bootstrap.BootstrapConfiguration=\
-com.lwk.coding.client.ClientConfig
+com.lwk.coding.cloud.ClientConfig

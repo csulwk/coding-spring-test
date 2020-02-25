@@ -1,4 +1,4 @@
-package com.lwk.coding.client;
+package com.lwk.coding.cloud;
 
 import com.lwk.coding.Application;
 import lombok.extern.slf4j.Slf4j;
@@ -6,13 +6,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.config.client.ConfigClientProperties;
 import org.springframework.cloud.config.client.ConfigServicePropertySourceLocator;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertySource;
-import org.springframework.core.env.StandardEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.support.StandardServletEnvironment;
 
@@ -33,6 +34,9 @@ public class ClientSourceLocatorTest {
     private String configPath;
     private String configPathHis;
 
+    @Autowired
+    Environment environment;
+
     @Before
     public void getClientPath() {
         appPath = new ApplicationHome().toString();
@@ -43,7 +47,7 @@ public class ClientSourceLocatorTest {
 
     @Test
     public void testGetCloudConfig() {
-        log.info("测试开始执行：{}", "testGetCloudConfig()");
+        log.info("测试开始执行...");
         File configFile = new File(configPath);
         File configFileHis = new File(configPathHis);
         deleteFiles(configFile, configFileHis);
@@ -51,13 +55,13 @@ public class ClientSourceLocatorTest {
         ConfigServicePropertySourceLocator locator = getPropertySourceLocator();
         ClientSourceLocator codingLocator = new ClientSourceLocator(locator,
                 CLIENT_FILE_NAME, true, true);
-        PropertySource<?> propertySource = codingLocator.locate(new StandardServletEnvironment());
+        PropertySource<?> propertySource = codingLocator.locate(environment);
         if (propertySource != null) {
             log.info("propertySource is not null...");
             Assert.assertTrue(configFile.exists());
             Assert.assertTrue(configFileHis.exists());
         }
-        log.info("测试执行结束：{}", "testGetCloudConfig()");
+        log.info("测试执行结束...");
     }
 
     /**

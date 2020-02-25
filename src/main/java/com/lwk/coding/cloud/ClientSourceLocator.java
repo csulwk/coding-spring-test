@@ -1,4 +1,4 @@
-package com.lwk.coding.client;
+package com.lwk.coding.cloud;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +63,7 @@ public class ClientSourceLocator implements PropertySourceLocator {
     @Override
     public PropertySource<?> locate(Environment environment) {
 
-        log.info("当前类开始执行：{}.{}", "CodingSourceLocator", "locate()");
+        log.info("当前执行：{}.{}", "CodingSourceLocator", "locate()");
 
         PropertySource<?> clientSource = null;
         // 远程配置
@@ -80,7 +80,7 @@ public class ClientSourceLocator implements PropertySourceLocator {
             // 获取本地文件的配置源
             clientSource = getPropertySource(configPath);
         }
-        log.info("当前类结束执行：{}.{}", "CodingSourceLocator", "locate");
+        log.info("结束执行：{}.{}", "CodingSourceLocator", "locate()");
         return clientSource;
     }
 
@@ -96,10 +96,10 @@ public class ClientSourceLocator implements PropertySourceLocator {
             prop.load(inputStream);
             return prop;
         } catch (FileNotFoundException e) {
-            log.info("loadProperties 获取文件异常", e);
+            log.info("加载的本地配置文件不存在", e);
             return null;
         } catch (IOException e) {
-            log.info("loadProperties 文件处理异常", e);
+            log.info("加载本地配置文件时异常", e);
             return null;
         }
     }
@@ -117,7 +117,7 @@ public class ClientSourceLocator implements PropertySourceLocator {
         String clientVersion = clientProp.getProperty(CLIENT_VERSION_NAME);
         log.info("比较本地和远程配置源的版本：client->{}, server->{}", clientVersion, serverVersion);
         if (serverVersion == null) {
-            log.info("远程配置源版本为NULL...");
+            log.info("未获取到远程配置源的版本...");
             return true;
         }
         if (!serverVersion.equals(clientVersion)) {
@@ -136,9 +136,10 @@ public class ClientSourceLocator implements PropertySourceLocator {
      */
     private PropertySource<?> getPropertySource(String path) {
         log.info("当前执行：{}.{}", "CodingSourceLocator", "getPropertySource()");
+        log.info("获取本地配置源: path = {}", path);
         Properties prop = loadProperties(path);
         if (prop == null || prop.isEmpty()) {
-            log.info("获取本地文件的配置源失败: path = {}", path);
+            log.info("获取本地配置源失败...");
             return null;
         }
         return new PropertiesPropertySource(path, prop);
@@ -152,7 +153,7 @@ public class ClientSourceLocator implements PropertySourceLocator {
         log.info("当前执行：{}.{}", "CodingSourceLocator", "downloadServerProperties");
 
         if (!coverClientEnabled) {
-            log.info("coverClientEnabled is: {}", coverClientEnabled);
+            log.info("当前设置为不覆盖本地配置：coverClientEnabled = {}", coverClientEnabled);
             return;
         }
 
@@ -175,7 +176,7 @@ public class ClientSourceLocator implements PropertySourceLocator {
                     return;
                 }
             } catch (IOException e) {
-                log.error("downloadServerProperties 文件处理异常", e);
+                log.error("本地配置文件备份时异常", e);
             }
         }
 
@@ -199,9 +200,9 @@ public class ClientSourceLocator implements PropertySourceLocator {
             serverProp.setProperty(CLIENT_VERSION_NAME, configVersion == null ? "" : configVersion);
             serverProp.store(fos, sb.toString());
         } catch (FileNotFoundException e) {
-            log.error("coverClientProperties 获取文件异常", e);
+            log.error("配置项写入的本地文件不存在", e);
         } catch (IOException e) {
-            log.error("coverClientProperties 文件处理异常", e);
+            log.error("配置项写入本地文件时异常", e);
         }
     }
 
