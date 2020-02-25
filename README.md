@@ -4,7 +4,7 @@
 > **SpringBoot持续化集成开发项目**  
 > **GitHub: [https://github.com/csulwk/coding-spring-test.git](https://github.com/csulwk/coding-spring-test.git)**  
 
-应用目标：  
+实现目标：  
 - [x] 集成mybatis和mysql  
 - [x] 集成swagger  
 - [x] 集成Git配置中心  
@@ -48,7 +48,7 @@ coding-spring-test
 │  │  │  │  ├─ controller       -- 请求处理类
 │  │  │  │  ├─ dao              -- 数据处理类
 │  │  │  │  ├─ entity           -- 实体类
-│  │  │  │  │  ├─ exception     -- 自定义异常类类
+│  │  │  │  │  ├─ exception     -- 自定义异常类
 │  │  │  │  │  ├─ req           -- 请求类
 │  │  │  │  │  └─ resp          -- 响应类
 │  │  │  │  ├─ mapper           -- 映射文件配置类
