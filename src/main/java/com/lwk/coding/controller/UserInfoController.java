@@ -35,7 +35,7 @@ public class UserInfoController {
     @RequestLog(description = "请求查询用户信息")
     @GetMapping("/{name}")
     public JSONObject queryUserInfoByName(@PathVariable(value = "name", required = true) String name) {
-        log.info("根据姓名查询用户信息 -> " , JSONObject.toJSONString(name));
+        log.info("根据姓名查询用户信息 -> {}" , JSONObject.toJSONString(name));
 
         if (StringUtils.isEmpty(name)) {
             return ResultUtil.resp(RetMsg.RET_E101);

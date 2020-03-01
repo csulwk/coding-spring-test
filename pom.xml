@@ -65,6 +65,12 @@
             <artifactId>spring-cloud-starter-config</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- 服务链路追踪 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <!-- 单元测试 -->
         <dependency>
             <groupId>junit</groupId>
