@@ -12,7 +12,7 @@
 - [ ] 对接日志云  
 - [ ] 对接健康检查  
 - [ ] 对接注册中心  
-- [ ] 对接调用链和性能监控zipkin  
+- [x] 对接调用链和性能监控zipkin  
 - [ ] 对接metrics和jvm监控，prometheus，grafana  
 - [x] 使用jasypt增强安全性  
 - [x] jenkins持续化集成
