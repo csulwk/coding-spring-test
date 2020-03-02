@@ -8,6 +8,11 @@
     <artifactId>coding-spring-test</artifactId>
     <version>1.0.0</version>
 
+    <organization>
+        <name>coding-spring-test</name>
+        <url>https://github.com/csulwk/coding-spring-test.git</url>
+    </organization>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -16,15 +21,15 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- spring cloud -->
-            <!-- cobertura -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <organization>
-        <name>coding-spring-test</name>
-        <url>https://github.com/csulwk/coding-spring-test.git</url>
-    </organization>
 
     <properties>
         <java.version>1.8</java.version>
@@ -65,10 +70,21 @@
             <artifactId>spring-cloud-starter-config</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- 熔断处理 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+            <version>1.4.7.RELEASE</version>
+        </dependency>
         <!-- 服务链路追踪 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <!-- 单元测试 -->

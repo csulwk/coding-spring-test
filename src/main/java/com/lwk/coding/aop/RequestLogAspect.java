@@ -63,6 +63,7 @@ public class RequestLogAspect {
         String methodDescription = getRequestLogDescription(joinPoint);
 
         // 打印请求相关参数
+        log.info("=============");
         log.info("请求开始...");
         // 打印请求的描述信息
         log.info("RequestDesc : {}", methodDescription);
