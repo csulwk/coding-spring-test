@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * REST服务调用和熔断处理
  * @author kai
  * @date 2020-03-02 21:35
  */

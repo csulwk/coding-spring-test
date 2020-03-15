@@ -1,0 +1,23 @@
+# .\filebeat -e -c filebeat.yml
+
+filebeat.inputs:
+- type: log
+  # Change to true to enable this input configuration.
+  enabled: true
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    #- /var/log/*.log
+    - D:\appdata\logs\coding-spring-test.log
+  # Manage multiline message
+  multiline.pattern: '^\d{4}-\d{2}-\d{2}'
+  multiline.negate: true
+  multiline.match: after
+
+output.logstash:
+  hosts: ["192.168.99.100:5044"]
+  reload.period: 10s
+
+# output.elasticsearch:
+#   hosts: ["192.168.99.100:9200"]
+  
+  

@@ -7,7 +7,7 @@
         <!-- 指定日志存储的路径 -->
         <property name="loggingPath" value="${env:LOG_HOME:-/appdata/logs/}" />
         <!-- 格式化输出：%d表示日期，%t表示线程名，%-5level表示级别从左显示5个字符宽度 %m是日志消息，%n是换行符-->
-        <property name="loggingPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${hostName}] [${appName}] [%-5level] [%t] [%X{X-B3-TraceId},%X{X-B3-SpanId},%X{X-B3-ParentSpanId},%X{X-Span-Export}] [%c{1.}] ❤ %m%n" />
+        <property name="loggingPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${hostName}] [${appName}] [%-5level] [%t] [%X{X-B3-TraceId},%X{X-B3-SpanId},%X{X-B3-ParentSpanId},%X{X-Span-Export}] [%c{1.}] : %m%n" />
     </Properties>
 
     <Appenders>

@@ -1,0 +1,18 @@
+
+# Build
+Root POM: pom.xml
+Goals and options: clean package -Dmaven.test.skip=true
+
+# Post Steps
+Send files or execute commands over SSH as a build step during the build (Publish Over SSH):
+  Transfers:
+    Source files: dist/$APP_NAME-1.0.0.tar.gz
+    Remove prefix: dist
+    Remote directory: /home/coding/app/
+    Exec command: echo "开始执行远程命令..."
+                  ls -l /home/coding/app
+                  source /etc/profile
+                  sh /home/coding/shell/jenkins_publisher.sh $BUILD_NUMBER $APP_NAME
+                  echo "远程命令执行结束..."
+
+# Back and Restore Configuration By thinBackup plugins

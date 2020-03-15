@@ -20,12 +20,16 @@
 
 ## 开发环境
 * `SpringBoot 2.2.1`  
-* `JDK 1.8.66`  
+* `Jdk 1.8.66`  
 * `Maven 3.6.0`  
 * `MySQL 5.6.46`  
 * `Docker 19.03.1`  
 * `Jenkins 2.204.1`  
 * `Zipkin 2.12.2`  
+* `Elasticsearch 6.4.1`  
+* `Kibana 6.4.1`  
+* `Logstash 6.4.1`  
+* `Filebeat 6.8.2`  
 
 ## 项目结构
 ```
@@ -33,6 +37,9 @@ coding-spring-test
 ├─ bin
 │  ├─ coding-spring-test.sh     -- 应用启动脚本
 │  └─ jenkins_publisher.sh      -- Jenkins自动化发布脚本
+├─ cfg
+│  ├─ elk                       -- ELK组件配置
+│  └─ jenkins                   -- jenkins配置
 ├─ init
 │  └─ db_test.sql               -- 初始化建表语句
 ├─ src

@@ -7,7 +7,7 @@ spring:
     # 配置中心
     config:
       # 配置中心服务地址可用端口为9188，若使用本地配置则修改为其他不可用端口
-      uri: ${SPRING_CLOUD_CONFIG_URI:http://106.12.159.160:9188/}
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://106.12.159.160:9189/}
       # 仓库分支
       label: ${SPRING_CLOUD_CONFIG_LABEL:master}
       # 当前环境
@@ -18,9 +18,9 @@ coding:
   config:
     client:
       # 是否启用缓存本地配置
-      enabled: false
+      enabled: true
       # 是否使用远程配置中心文件覆盖本地配置文件
-      cover: true
+      cover: false
       # 当远程配置中心不可用时是否使用本地配置文件
       apply: true
 

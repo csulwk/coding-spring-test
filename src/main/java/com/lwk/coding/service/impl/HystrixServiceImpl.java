@@ -27,7 +27,7 @@ public class HystrixServiceImpl implements IHystrixService {
         if ("sleep".equals(name)) {
             try {
                 long sleepTime = 12000;
-                log.info("当前请求许等待{}ms...", sleepTime);
+                log.info("当前请求需等待{}ms...", sleepTime);
                 Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
                 log.error("线程睡眠错误!", e);
