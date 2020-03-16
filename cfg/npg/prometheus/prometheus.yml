@@ -1,0 +1,22 @@
+# /etc/prometheus/prometheus.yml
+
+# 全局设置
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # prometheus本地配置
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['192.168.99.100:9090']
+  # 应用服务配置
+  - job_name: 'coding-spring-test'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 10s
+    static_configs:
+    - targets: ['192.168.0.11:9102']

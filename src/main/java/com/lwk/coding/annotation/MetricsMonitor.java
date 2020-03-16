@@ -6,16 +6,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 请求日志自定义注解
+ * 自定义指标监控
  * @author kai
- * @date 2020-02-11 15:42
+ * @date 2020-03-16 10:58
  */
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
-public @interface RequestLog {
+public @interface MetricsMonitor {
     /**
-     * 请求描述信息
-     * @return
+     * 请求接口标识名称
      */
-    String description() default "";
+    String desc() default "";
 }

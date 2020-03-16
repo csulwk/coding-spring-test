@@ -1,7 +1,7 @@
 package com.lwk.coding.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lwk.coding.annotation.RequestLog;
+import com.lwk.coding.annotation.RequestMonitor;
 import com.lwk.coding.constant.RetMsg;
 import com.lwk.coding.entity.UserInfo;
 import com.lwk.coding.service.impl.UserInfoService;
@@ -32,7 +32,7 @@ public class UserInfoController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "用户姓名", required = true)
     })
-    @RequestLog(description = "请求查询用户信息")
+    @RequestMonitor(desc = "请求查询用户信息")
     @GetMapping("/{name}")
     public JSONObject queryUserInfoByName(@PathVariable(value = "name", required = true) String name) {
         log.info("根据姓名查询用户信息 -> {}" , JSONObject.toJSONString(name));

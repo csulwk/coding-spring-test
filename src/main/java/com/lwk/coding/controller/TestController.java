@@ -1,7 +1,7 @@
 package com.lwk.coding.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lwk.coding.annotation.RequestLog;
+import com.lwk.coding.annotation.RequestMonitor;
 import com.lwk.coding.entity.req.TestReq;
 import com.lwk.coding.service.ITestService;
 import io.swagger.annotations.Api;
@@ -9,8 +9,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +35,7 @@ public class TestController {
             @ApiImplicitParam(name = "operType", value = "查询类型", defaultValue = "OP001", required = true),
             @ApiImplicitParam(name = "cardNumber", value = "卡号", defaultValue = "123456", required = true)
     })
-    @RequestLog(description = "请求查询卡片信息")
+    @RequestMonitor(desc = "请求查询卡片信息")
     @PostMapping("/test")
     public JSONObject queryCardInfo(@Valid @RequestBody TestReq req) {
         log.info("测试接口, requestData:{}", JSONObject.toJSONString(req));
