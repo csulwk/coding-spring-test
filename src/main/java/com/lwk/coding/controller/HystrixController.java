@@ -1,7 +1,7 @@
 package com.lwk.coding.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lwk.coding.annotation.RequestLog;
+import com.lwk.coding.annotation.RequestMonitor;
 import com.lwk.coding.service.IHystrixService;
 import com.lwk.coding.util.ResultUtil;
 import io.swagger.annotations.Api;
@@ -26,7 +26,7 @@ public class HystrixController {
     @Autowired
     private IHystrixService hystrixService;
 
-    @RequestLog(description = "熔断测试查询")
+    @RequestMonitor(desc = "熔断测试查询")
     @GetMapping("/{name}")
     public JSONObject queryHystrixController(@PathVariable(value = "name", required = true) String name) {
         log.info("熔断测试查询 -> {}" , JSONObject.toJSONString(name));

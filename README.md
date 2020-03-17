@@ -10,16 +10,17 @@
 - [x] 集成Git配置中心  
 - [x] 使用本地缓存配置
 - [x] 对接日志云  
-- [ ] 对接健康检查  
+- [x] 对接健康检查  
 - [ ] 对接注册中心  
 - [x] 对接调用链和性能监控zipkin  
-- [ ] 对接metrics和jvm监控，prometheus，grafana  
+- [x] 对接metrics和jvm监控, 集成prometheus和grafana组件  
 - [x] 使用jasypt增强安全性  
-- [x] jenkins持续化集成
+- [x] 使用jenkins持续化集成
 
 
 ## 开发环境
 * `SpringBoot 2.2.1`  
+* `SpringCloud Hoxton.SR1`  
 * `Jdk 1.8.66`  
 * `Maven 3.6.0`  
 * `MySQL 5.6.46`  
@@ -30,6 +31,10 @@
 * `Kibana 6.4.1`  
 * `Logstash 6.4.1`  
 * `Filebeat 6.8.2`  
+* `Prometheus 2.16.0`  
+* `Grafana 6.7.0`  
+* `Node-exporter 1.0.0-rc.0`  
+
 
 ## 项目结构
 ```
@@ -39,7 +44,8 @@ coding-spring-test
 │  └─ jenkins_publisher.sh      -- Jenkins自动化发布脚本
 ├─ cfg
 │  ├─ elk                       -- ELK组件配置
-│  └─ jenkins                   -- jenkins配置
+│  ├─ npg                       -- Prometheus配置
+│  └─ jenkins                   -- Jenkins配置
 ├─ init
 │  └─ db_test.sql               -- 初始化建表语句
 ├─ src
@@ -60,6 +66,7 @@ coding-spring-test
 │  │  │  │  │  ├─ req           -- 请求类
 │  │  │  │  │  └─ resp          -- 响应类
 │  │  │  │  ├─ mapper           -- 映射文件配置类
+│  │  │  │  ├─ metrics          -- 应用监控处理类
 │  │  │  │  ├─ service          -- 业务处理类
 │  │  │  │  ├─ util             -- 工具类
 │  │  │  │  └─ validator        -- 自定义校验规则

@@ -1,0 +1,30 @@
+
+# prometheus
+docker run -d --name prometheus \
+  -p 9090:9090 \
+  -v /docker/npg/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  \
+  prom/prometheus
+http://192.168.99.100:9090/graph
+http://192.168.99.100:9090/targets
+docker exec -it prometheus bash
+
+# grafana
+docker run -d --name grafana \
+  -p 3000:3000 \
+  -v /docker/npg/grafana:/var/lib/grafana \
+  grafana/grafana
+http://192.168.99.100:3000/
+docker exec -it grafana bash
+
+# node-exporter
+docker run -d --name exporter \
+  -p 9100:9100 \
+  -v "/proc:/host/proc:ro" \
+  -v "/sys:/host/sys:ro" \
+  -v "/:/rootfs:ro" \
+  prom/node-exporter
+http://192.168.99.100:9100/metrics
+
+docker start prometheus
+docker logs -f -t --tail 100 prometheus
+docker exec -it --user root prometheus bash

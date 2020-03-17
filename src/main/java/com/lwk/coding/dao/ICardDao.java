@@ -1,8 +1,7 @@
 package com.lwk.coding.dao;
 
 import com.lwk.coding.entity.CardInfoEntity;
-import com.lwk.coding.entity.req.TestReq;
-import org.springframework.stereotype.Repository;
+import com.lwk.coding.entity.req.CardReq;
 
 import java.util.List;
 
@@ -11,11 +10,11 @@ import java.util.List;
  * @date 2019-12-29 22:10
  */
 
-public interface ITestDao {
+public interface ICardDao {
     /**
      * 分页查询
      * @param req
      * @return
      */
-    List<CardInfoEntity> queryCardInfo(TestReq req);
+    List<CardInfoEntity> queryCardInfo(CardReq req);
 }

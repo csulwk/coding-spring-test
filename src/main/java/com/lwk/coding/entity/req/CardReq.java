@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @date 2019-12-02 0:56
  */
 @ApiModel
-public class TestReq implements Serializable {
+public class CardReq implements Serializable {
 
     /**
      * 查询类型

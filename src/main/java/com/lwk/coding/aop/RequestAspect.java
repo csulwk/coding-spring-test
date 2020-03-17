@@ -1,11 +1,13 @@
 package com.lwk.coding.aop;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lwk.coding.annotation.RequestLog;
+import com.lwk.coding.annotation.RequestMonitor;
+import com.lwk.coding.metrics.MetricsStatsAsync;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -23,21 +25,29 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 @Slf4j
-public class RequestLogAspect {
+public class RequestAspect {
+
+    @Autowired
+    private MetricsStatsAsync myMetricsAsync;
 
     /**
-     * 以 @RequestLog 自定义注解为切点
+     * 以自定义注解作为切点
      */
-    @Pointcut("@annotation(com.lwk.coding.annotation.RequestLog)")
-    public void requestLog() {
-    }
+    @Pointcut("@annotation(com.lwk.coding.annotation.RequestMonitor)")
+    public void requestMonitorMethod() {}
+
+    /**
+     * 以RequestMapping注解作为切点
+     */
+    @Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    public void requestMappingMethod() {}
 
     /**
      * 环绕，可以在切点前后织入代码，并且可以自由的控制何时执行切点
      * @param proceedingJoinPoint
      * @return
      */
-    @Around("requestLog()")
+    @Around("requestMonitorMethod() || requestMappingMethod()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         // 执行切点
@@ -47,6 +57,10 @@ public class RequestLogAspect {
         log.info("ResponseMsg : {}", JSONObject.toJSONString(respObj));
         // 执行请求耗时
         log.info("UsedTime    : {} ms", endTime - startTime);
+
+        // 异步统计调用次数
+        myMetricsAsync.counting(proceedingJoinPoint, respObj);
+
         return respObj;
     }
 
@@ -54,7 +68,7 @@ public class RequestLogAspect {
      * 在切点之前，织入相关代码
      * @param joinPoint
      */
-    @Before("requestLog()")
+    @Before("requestMonitorMethod()")
     public void doBefore(JoinPoint joinPoint) throws ClassNotFoundException {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -95,7 +109,7 @@ public class RequestLogAspect {
             if (method.getName().equals(methodName)) {
                 Class[] clazzs = method.getParameterTypes();
                 if (clazzs.length == args.length) {
-                    description.append(method.getAnnotation(RequestLog.class).description());
+                    description.append(method.getAnnotation(RequestMonitor.class).desc());
                     break;
                 }
             }
@@ -106,7 +120,7 @@ public class RequestLogAspect {
     /**
      * 在切点之后，织入相关代码
      */
-    @After("requestLog()")
+    @After("requestMonitorMethod()")
     public void doAfter() {
         log.info("请求结束...");
     }

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author kai
  * @date 2019-12-02 2:13
  */
-public class TestResp implements Serializable {
+public class CardResp implements Serializable {
     private String ciId;
     private String ciCardNumber;
 

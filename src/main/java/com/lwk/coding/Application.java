@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author kai
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableCircuitBreaker
 @ComponentScan("com.lwk")
 @MapperScan("com.lwk.coding.mapper")
+@EnableAsync
 @Slf4j
 public class Application {
 
