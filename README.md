@@ -33,6 +33,8 @@
 * `Filebeat 6.8.2`  
 * `Prometheus 2.16.0`  
 * `Grafana 6.7.0`  
+* `Node-exporter 1.0.0-rc.0`  
+
 
 ## 项目结构
 ```
