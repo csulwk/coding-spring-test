@@ -32,6 +32,7 @@ public class DBConfig {
     @Bean(name = "dataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource getDataSource() {
+        log.info("url:{}, user:{}, pwd:{}", dbUrl, dbUsername, dbPassword);
         DataSourceBuilder builder = DataSourceBuilder.create();
         builder.driverClassName(dbDriverClassName);
         builder.url(dbUrl);
