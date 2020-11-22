@@ -7,7 +7,7 @@ spring:
     # 配置中心
     config:
       # 配置中心服务地址可用端口为9188，若使用本地配置则修改为其他不可用端口
-      uri: ${SPRING_CLOUD_CONFIG_URI:http://106.12.159.160:9189/}
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://8.135.11.160:9189/}
       # 仓库分支
       label: ${SPRING_CLOUD_CONFIG_LABEL:master}
       # 当前环境

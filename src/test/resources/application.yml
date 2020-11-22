@@ -1,0 +1,67 @@
+# 单元测试调试使用
+# 端口信息
+server:
+  port: 9102
+spring:
+  application:
+    name: coding-spring-test
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.99.100:3306/db_test?characterEncoding=utf8
+    username: root
+    password: ENC(hXC2GiUpg2X71fn5XrfV8g==)
+
+# 整合mybatis
+mybatis:
+  # 数据持久化实体类路径
+  type-aliases-package: com.lwk.coding.entity
+  # xml文件路径
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 开启驼峰映射
+    map-underscore-to-camel-case: true
+
+# 生产环境中，切记不要直接进行设置，可通过环境变量、命令行等形式进行设置
+# java -jar xxx.jar --jasypt.encryptor.password=xxx &
+jasypt:
+  encryptor:
+    password: lwk
+
+# REST服务参数配置
+rest:
+  timeout:
+    # 请求连接超时时间
+    connect: 6000
+    # 请求处理超时时间
+    read: 4000
+
+# Hystrix的超时 > 其他组件的超时，否则将可能导致重试特性失效
+hystrix:
+  command:
+    # 指定接口的超时设置
+    hystrixService:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 8000
+    # 默认超时设置
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+# 日志打印配置
+logging:
+  config: classpath:log4j2.xml
+  level:
+    # 打印SQL语句的日志级别是DEBUG，而打印SQL执行结果集的日志级别是TRACE
+    com.lwk.coding.mapper: trace
+    org.springframework.cloud.openfeign: info
+    org.springframework.cloud.sleuth: info
+
