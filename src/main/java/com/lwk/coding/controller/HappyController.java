@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class HappyController {
     private IHappyMessageMapper happyMessageMapper;
 
     @PostMapping("/insert")
-    public JSONObject insertMessage(@RequestBody HappyReq req) {
+    public JSONObject insertMessage(@Valid @RequestBody HappyReq req) {
         log.info("新增消息 -> {}" , JSONObject.toJSONString(req));
 
         HappyMessage msg = new HappyMessage();
