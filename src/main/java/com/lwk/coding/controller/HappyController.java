@@ -16,6 +16,7 @@ import java.util.List;
  * @author kai
  * @date 2020-01-07 23:17
  */
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/happy")
 @RestController
 @Slf4j
