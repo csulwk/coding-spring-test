@@ -11,6 +11,7 @@ public enum RetMsg {
     RET_E102(CodeSet.CODE_E102, "卡号输入有误"),
     RET_E103(CodeSet.CODE_E103, "响应错误3"),
     RET_E104(CodeSet.CODE_E104, "响应错误4"),
+    RET_E105(CodeSet.CODE_E105, "输入参数不规范"),
     ERROR(CodeSet.CODE_E999, "未定义异常");
 
     private String code;

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lwk.coding.mapper.IHappyMessageMapper">
+    <resultMap id="messageMap" type="com.lwk.coding.entity.HappyMessage">
+        <id column="hm_id" jdbcType="INTEGER" property="hmId" />
+        <result column="hm_name" jdbcType="VARCHAR" property="hmName" />
+        <result column="hm_message" jdbcType="VARCHAR" property="hmMessage" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    </resultMap>
+
+    <select id="selectMessage" resultMap="messageMap">
+        SELECT hm_id, hm_name, hm_message, create_time, update_time, update_by
+        FROM happy_message
+    </select>
+
+    <insert id="saveMessage" parameterType="com.lwk.coding.entity.HappyMessage">
+        INSERT INTO happy_message(hm_name, hm_message, update_by)
+        VALUES (#{hmName}, #{hmMessage}, #{updateBy})
+    </insert>
+
+
+</mapper>
